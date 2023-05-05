@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-crop-image": "^1.0.0",
+    "react-image-crop": "^10.0.9"
+  }
+}
