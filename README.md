@@ -1,6 +1,6 @@
 # ImageCrop_assignment_ProGalaxy
 
-Problem statement:
+#Problem statement:
 create a simple front end web page and demonstrate image crop and resize
 
 functionality using html, js and css. - provide a button for user to browse and select a png/jpeg file from their local hard drive
