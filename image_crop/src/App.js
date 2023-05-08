@@ -42,8 +42,8 @@ export default () => {
   const cropImage = () => {
     let image = document.getElementById("img")
     const cropper = new Cropper(image, {
-      aspectRatio: 16 / 9,
-      viewMode: 1,
+      aspectRatio: 1,
+      viewMode: 0,
       crop(ev){
         console.log(ev.detail.x);
         console.log(ev.detail.y);
@@ -74,6 +74,8 @@ export default () => {
     console.log(cropper.getData())
     cropper.crop()
     cropper.setData({})
+    croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
+    document.getElementById("disp").src = croppedImage;
   }
   return(
     <div className="MainApp">
