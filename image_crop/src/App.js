@@ -13,36 +13,37 @@ export default () => {
   const inpRef = useRef(null)
   const [file, setFile] = useState("");
 
-  const dispPreview = (e) => {
-    console.log("display preview")
-    let prev = document.getElementById("disp")
-    prev.setAttribute('src', file)
-    prev.setAttribute("width", e.detail.width)  
-    prev.setAttribute("height", e.detail.height)
-    prev.setAttribute("alt", 'display-prev')
+  // const dispPreview = (e) => {
+  //   console.log("display preview")
+  //   // let prev = document.getElementById("disp")
+  //   // prev.setAttribute('src', file)
+  //   // prev.setAttribute("width", e.detail.width)  
+  //   // prev.setAttribute("height", e.detail.height)
+  //   // prev.setAttribute("alt", 'display-prev')
 
-    // let imgPrev = document.getElementById("disp")
-    // const croper = new Cropper(imgPrev, {
-    //   crop(ev)
-    // })
-  }
+  //   // let imgPrev = document.getElementById("disp")
+  //   // const croper = new Cropper(imgPrev, {
+  //   //   crop(ev)
+  //   // })
+  // }
 
   const handleChange = (e) => {
     const fileURL = URL.createObjectURL(e.target.files[0]);
     setFile(fileURL);
   }
 
-  const [X, setX] = useState();
-  const [Y, setY] = useState();
-  const [Width, setWidth] = useState();
-  const [Height, setHeight] = useState();
-  const [ScaleX, setScaleX] = useState();
-  const [ScaleY, setScaleY] = useState();
+  // const [X, setX] = useState();
+  // const [Y, setY] = useState();
+  // const [Width, setWidth] = useState();
+  // const [Height, setHeight] = useState();
+  // const [ScaleX, setScaleX] = useState();
+  // const [ScaleY, setScaleY] = useState();
+  // const [croppedImage, setCroppedImage] = useState();
 
   const cropImage = () => {
     let image = document.getElementById("img")
     const cropper = new Cropper(image, {
-      aspectRatio: 1,
+      aspectRatio: 0,
       viewMode: 0,
       crop(ev){
         console.log(ev.detail.x);
@@ -52,53 +53,71 @@ export default () => {
         console.log(ev.detail.rotate);
         console.log(ev.detail.scaleX);
         console.log(ev.detail.scaleY);
-        setX(ev.detail.x);
-        setY(ev.detail.y)
-        setScaleY(ev.detail.y)
-        setHeight(ev.detail.height);
-        setWidth(ev.detail.width);
-        setScaleX(ev.detail.scaleX);
-        setScaleY(ev.detail.scaleY)
-        dispPreview(ev);
+        // setX(ev.detail.x);
+        // setY(ev.detail.y)
+        // setScaleY(ev.detail.y)
+        // setHeight(ev.detail.height);
+        // setWidth(ev.detail.width);
+        // setScaleX(ev.detail.scaleX);
+        // setScaleY(ev.detail.scaleY)
+        // dispPreview(ev);
       },
-      autoCrop: false,
+      // autoCrop: false,
       cropBoxMovable: true,
-      preview: document.querySelectorAll('.preview'),
+      zoomable: false,
+      // preview: document.querySelectorAll('.preview'),
+      // this:getCroppedCanvas().toDataURL
+      // getCroppedCanvas
       // preview: document.getElementById({/*"temp"*/},"img-prev"),
       // setData(){
       //   x: X;
       //   y: Y;
       //   width: Width;
       // }
+      // setCroppedImage(getCroppedCanvas().toDataURL("image/png")),
     })
-    console.log(cropper.getData())
-    cropper.crop()
-    cropper.setData({})
-    croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
-    document.getElementById("disp").src = croppedImage;
+    // console.log(cropper.getData())
+    // cropper.crop()
+    // cropper.setData({})
+    console.log(cropper.getCroppedCanvas());
+    // let croppeaArea = cropper.getCroppedCanvas({
+    //   width: 160,
+    //   height: 90,
+    //   fillColor: '#fff',
+    //   imageSmoothingEnabled: false,
+    //   imageSmoothingQuality: 'high',
+    //   fillColor: '#fff',
+    //   imageSmoothingEnabled: false,
+    //   imageSmoothingQuality: 'high',
+
+    // }).toDataURL("image/png")
+    // document.getElementById("disp").src = croppeaArea;
+    // setCroppedImage(cropper.getCroppedCanvas().toDataURL("image/png"));
   }
   return(
     <div className="MainApp">
       <h2>Tap on the upload icon to insert your image</h2>
       <div>
         <img width={100} src={upload} onClick={() => {inpRef.current.click();}}/>
-        <input type="file" onChange={handleChange} ref={inpRef} style={{display: "none"}}/><br/><br/><br/>
-      </div>
-      <button className="clear-image" onClick={() => {setFile()}}>Clear</button><br/><br/><br/>
+        <input type="file" onChange={handleChange} ref={inpRef} style={{display: "none"}} /> 
+      {/* </div>
+      <button className="clear-image" onClick={() => {setFile(""); Cropper.cropper.destroy()}}>Clear</button><br/><br/><br/>
+      <div> */}
+      </div> 
       <div>
         <img src={file} alt="no image selected" id="img"/>
-      </div><br/><br/><br/>
-      <button onClick={() => cropImage()} > Crop</button>
+      </div>
+      <button onClick={() => cropImage()} >Crop</button> 
         {/* <div>
           <img id='temp' alt='just tp' />
         </div> */}
-        {/* <div> */}
+        <div>
           <img id='preview' alt='prev'/>
-        {/* </div> */}
-      
-        <div >
-          <img id='disp'/>
         </div>
+      
+        {/* <div >
+          <canvas id='disp'/>
+        </div> */}
     </div>
   )
 }
